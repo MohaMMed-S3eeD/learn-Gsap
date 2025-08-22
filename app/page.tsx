@@ -19,23 +19,80 @@ export default function Home() {
 
   useGSAP(() => {
     const T1 = gsap.timeline({
+      duration: 0.5,
+      ease: "power2.inOut",
       repeat: -1,
       yoyo: true,
     });
     T1.to(".box-1", {
       x: 150,
+      scale: 0.5,
+      opacity: 0.5,
+      duration: 0.5,
+      ease: "power2.inOut",
     });
     T1.to(".box-2", {
-      x: -150,
+      x: 180,
+      scale: 0.5,
+      opacity: 0.5,
+      duration: 0.5,
+      ease: "power2.inOut",
     });
     T1.to(".box-3", {
-      x: 150,
+      x: 210,
+      scale: 0.5,
+      opacity: 0.5,
+      duration: 0.5,
+      ease: "power2.inOut",
+    });
+    T1.to(".box-1", {
+      x: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      ease: "power2.inOut",
+    });
+    T1.to(".box-2", {
+      x: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      ease: "power2.inOut",
+    });
+    T1.to(".box-3", {
+      x: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      ease: "power2.inOut",
+    });
+
+    T1.to(".box-1", {
+      x: -150,
+      scale: 0.5,
+      opacity: 0.5,
+      duration: 0.5,
+      ease: "power2.inOut",
+    });
+    T1.to(".box-2", {
+      x: -180,
+      scale: 0.5,
+      opacity: 0.5,
+      duration: 0.5,
+      ease: "power2.inOut",
+    });
+    T1.to(".box-3", {
+      x: -210,
+      scale: 0.5,
+      opacity: 0.5,
+      duration: 0.5,
+      ease: "power2.inOut",
     });
   });
 
-  useGSAP(() => {
-    GSDevTools.create({});
-  });
+  // useGSAP(() => {
+  //   GSDevTools.create({});
+  // });
 
   return (
     <main>
@@ -47,9 +104,9 @@ export default function Home() {
         <div className="flex">
           <div className="box box-1 gradient-blue">Box 1</div>
           <br />
-          <div className="box box2 gradient-blue">Box 2</div>
+          <div className="box box-2 gradient-blue">Box 2</div>
           <br />
-          <div className="box box3 gradient-blue">Box 3</div>
+          <div className="box box-3 gradient-blue">Box 3</div>
         </div>
       </section>
     </main>
