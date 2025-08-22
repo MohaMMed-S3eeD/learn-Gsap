@@ -3,8 +3,8 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { CustomEase } from "gsap/CustomEase";
-
-gsap.registerPlugin(CustomEase);
+import { GSDevTools } from "gsap/GSDevTools";
+gsap.registerPlugin(CustomEase, GSDevTools);
 if (typeof window !== "undefined") {
   gsap.registerPlugin(useGSAP);
 }
@@ -18,30 +18,24 @@ export default function Home() {
   };
 
   useGSAP(() => {
-    const boxes = gsap.utils.toArray<HTMLElement>(".box");
-    gsap.to(boxes, {
-      x: 150,
-      opacity: 0.7,
-      duration: 1.5,
-      ease: "elastic.out(0.5, 0.3)",
+    const T1 = gsap.timeline({
       repeat: -1,
       yoyo: true,
-      stagger: 0.2,
+    });
+    T1.to(".box-1", {
+      x: 150,
+    });
+    T1.to(".box-2", {
+      x: -150,
+    });
+    T1.to(".box-3", {
+      x: 150,
     });
   });
 
-  // useGSAP(
-  //   () => {
-  //     const boxes = gsap.utils.toArray<HTMLElement>(".box");
-  //     tl.current = gsap
-  //       .timeline()
-  //       .to(boxes[0], { x: 120, rotation: 360 })
-  //       .to(boxes[1], { x: -120, rotation: -360 }, "<")
-  //       .to(boxes[2], { y: -166 })
-  //       .reverse();
-  //   },
-  //   { scope: container }
-  // );
+  useGSAP(() => {
+    GSDevTools.create({});
+  });
 
   return (
     <main>
@@ -51,11 +45,11 @@ export default function Home() {
           <button onClick={toggleTimeline}>Toggle Timeline</button>
         </div>
         <div className="flex">
-          <div className="box gradient-blue">Box 1</div>
+          <div className="box box-1 gradient-blue">Box 1</div>
           <br />
-          <div className="box gradient-blue">Box 2</div>
+          <div className="box box2 gradient-blue">Box 2</div>
           <br />
-          <div className="box gradient-blue">Box 3</div>
+          <div className="box box3 gradient-blue">Box 3</div>
         </div>
       </section>
     </main>
