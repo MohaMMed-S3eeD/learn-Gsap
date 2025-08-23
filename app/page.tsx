@@ -31,11 +31,10 @@ export default function Home() {
           start: "top top",
           end: "bottom 20%",
           scrub: true,
-          markers: true,
+          // markers: true,
           pin: true,
         },
       });
-     
     });
   });
 
@@ -56,7 +55,7 @@ export default function Home() {
           <Image id="img" src="/next.svg" alt="test" width={250} height={250} />
         </div>
         <div className=" h-[1500px] w-screen bg-slate-700">
-          <h1 className="text-white text-4xl font-bold">End</h1>
+          <h1 className="text-white text-7xl font-bold text-center ">End</h1>
         </div>
       </section>
     </main>
