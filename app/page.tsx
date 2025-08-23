@@ -12,81 +12,83 @@ if (typeof window !== "undefined") {
 export default function Home() {
   const container = useRef<HTMLElement | any>();
   const tl = useRef<GSAPTimeline | any>();
-
+  const media = gsap.matchMedia();
   const toggleTimeline = () => {
     tl.current.reversed(!tl.current.reversed());
   };
 
   useGSAP(() => {
-    const T1 = gsap.timeline({
-      duration: 0.5,
-      ease: "power2.inOut",
-      repeat: -1,
-      yoyo: true,
-    });
-    T1.to(".box-1", {
-      x: 150,
-      scale: 0.5,
-      opacity: 0.5,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-    T1.to(".box-2", {
-      x: 180,
-      scale: 0.5,
-      opacity: 0.5,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-    T1.to(".box-3", {
-      x: 210,
-      scale: 0.5,
-      opacity: 0.5,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-    T1.to(".box-1", {
-      x: 0,
-      scale: 1,
-      opacity: 1,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-    T1.to(".box-2", {
-      x: 0,
-      scale: 1,
-      opacity: 1,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-    T1.to(".box-3", {
-      x: 0,
-      scale: 1,
-      opacity: 1,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
+    media.add("(min-width: 768px)", () => {
+      const T1 = gsap.timeline({
+        duration: 0.5,
+        ease: "power2.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
+      T1.to(".box-1", {
+        x: 150,
+        scale: 0.5,
+        opacity: 0.5,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
+      T1.to(".box-2", {
+        x: 180,
+        scale: 0.5,
+        opacity: 0.5,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
+      T1.to(".box-3", {
+        x: 210,
+        scale: 0.5,
+        opacity: 0.5,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
+      T1.to(".box-1", {
+        x: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
+      T1.to(".box-2", {
+        x: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
+      T1.to(".box-3", {
+        x: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
 
-    T1.to(".box-1", {
-      x: -150,
-      scale: 0.5,
-      opacity: 0.5,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-    T1.to(".box-2", {
-      x: -180,
-      scale: 0.5,
-      opacity: 0.5,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-    T1.to(".box-3", {
-      x: -210,
-      scale: 0.5,
-      opacity: 0.5,
-      duration: 0.5,
-      ease: "power2.inOut",
+      T1.to(".box-1", {
+        x: -150,
+        scale: 0.5,
+        opacity: 0.5,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
+      T1.to(".box-2", {
+        x: -180,
+        scale: 0.5,
+        opacity: 0.5,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
+      T1.to(".box-3", {
+        x: -210,
+        scale: 0.5,
+        opacity: 0.5,
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
     });
   });
 
