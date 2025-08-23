@@ -4,91 +4,38 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { CustomEase } from "gsap/CustomEase";
 import { GSDevTools } from "gsap/GSDevTools";
-gsap.registerPlugin(CustomEase, GSDevTools);
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+
+gsap.registerPlugin(CustomEase, GSDevTools, ScrollTrigger);
 if (typeof window !== "undefined") {
   gsap.registerPlugin(useGSAP);
 }
 
 export default function Home() {
   const container = useRef<HTMLElement | any>();
-  const tl = useRef<GSAPTimeline | any>();
   const media = gsap.matchMedia();
-  const toggleTimeline = () => {
-    tl.current.reversed(!tl.current.reversed());
-  };
 
   useGSAP(() => {
     media.add("(min-width: 768px)", () => {
-      const T1 = gsap.timeline({
-        duration: 0.5,
-        ease: "power2.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-      T1.to(".box-1", {
-        x: 150,
-        scale: 0.5,
-        opacity: 0.5,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
-      T1.to(".box-2", {
-        x: 180,
-        scale: 0.5,
-        opacity: 0.5,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
-      T1.to(".box-3", {
-        x: 210,
-        scale: 0.5,
-        opacity: 0.5,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
-      T1.to(".box-1", {
-        x: 0,
-        scale: 1,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
-      T1.to(".box-2", {
-        x: 0,
-        scale: 1,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
-      T1.to(".box-3", {
-        x: 0,
-        scale: 1,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
+      const tl = gsap.timeline();
 
-      T1.to(".box-1", {
-        x: -150,
-        scale: 0.5,
-        opacity: 0.5,
-        duration: 0.5,
+      tl.to("#img", {
+        duration: 10,
+        backgroundColor: "",
+        // rotate: 360,
+        scale: 30,
         ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: "#conImg",
+          start: "top top",
+          end: "bottom 20%",
+          scrub: true,
+          markers: true,
+          pin: true,
+        },
       });
-      T1.to(".box-2", {
-        x: -180,
-        scale: 0.5,
-        opacity: 0.5,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
-      T1.to(".box-3", {
-        x: -210,
-        scale: 0.5,
-        opacity: 0.5,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
+     
     });
   });
 
@@ -98,17 +45,18 @@ export default function Home() {
 
   return (
     <main>
-      <section className="boxes-container" ref={container}>
-        <h2>Use the button to toggle a Timeline</h2>
-        <div>
-          <button onClick={toggleTimeline}>Toggle Timeline</button>
+      <section className="flex flex-col">
+        <div className=" h-screen w-screen bg-slate-700 flex justify-center items-center">
+          <h1 className="text-white text-4xl font-bold">Start</h1>
         </div>
-        <div className="flex">
-          <div className="box box-1 gradient-blue">Box 1</div>
-          <br />
-          <div className="box box-2 gradient-blue">Box 2</div>
-          <br />
-          <div className="box box-3 gradient-blue">Box 3</div>
+        <div
+          id="conImg"
+          className=" shrink-0 overflow-hidden flex justify-center items-center h-screen w-screen border-2 border-red-500 bg-slate-300"
+        >
+          <Image id="img" src="/next.svg" alt="test" width={250} height={250} />
+        </div>
+        <div className=" h-[1500px] w-screen bg-slate-700">
+          <h1 className="text-white text-4xl font-bold">End</h1>
         </div>
       </section>
     </main>
