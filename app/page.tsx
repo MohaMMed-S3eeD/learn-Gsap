@@ -12,7 +12,10 @@ if (typeof window !== "undefined") {
 }
 
 export default function Home() {
-  const widthWindow = window.innerWidth;
+  let widthWindow = 0;
+  if (typeof window !== "undefined") {
+    widthWindow = window.innerWidth;
+  }
 
   useGSAP(() => {
     // create a intro
