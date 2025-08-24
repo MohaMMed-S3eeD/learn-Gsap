@@ -1,4 +1,5 @@
 "use client";
+
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,7 +9,7 @@ import { GSDevTools } from "gsap/GSDevTools";
 import Image from "next/image";
 gsap.registerPlugin(CustomEase, GSDevTools, ScrollTrigger);
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(useGSAP, ScrollTrigger);
 }
 
 export default function Home() {
