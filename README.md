@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Timeline :  
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun run dev
+
+## 🔹 الأول: الفكرة العامة
+
+الـ **Timeline** = خط زمني بتحط فيه الـ animations بالترتيب اللي انت عايزه.
+تقدر تقول كأنك بتعمل فيلم:
+
+* الـ **Scenes** = Animations (to / from / fromTo).
+* الـ **Timeline** = الفيلم كله مترتب.
+
+---
+
+## 🔹 إزاي بيتكون
+
+```js
+const tl = gsap.timeline({
+  repeat: -1,   // يعيد نفسه عدد لا نهائي
+  yoyo: true,   // لما يخلص يشتغل بالعكس
+  defaults: { duration: 1, ease: "power1.inOut" } // إعدادات افتراضية
+});
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+💡 أي animation جوه الـ timeline ده هياخد الـ defaults دي (لو ما حطيتش ليه قيم خاصة).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🔹 إضافة Animations
 
-## Learn More
+فيه ٣ طرق رئيسية:
 
-To learn more about Next.js, take a look at the following resources:
+1. **tl.to()**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```js
+   tl.to(".box", { x: 200 });
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   يحرك العنصر من حالته الحالية لغاية `x:200`.
 
-## Deploy on Vercel
+2. **tl.from()**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```js
+   tl.from(".title", { opacity: 0, y: -50 });
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   يبدأ من الحالة دي (شفاف وفوق شوية) وبعدين يروح لحالته الطبيعية.
+
+3. **tl.fromTo()**
+
+   ```js
+   tl.fromTo(".circle", { scale: 0 }, { scale: 1 });
+   ```
+
+   تحدد البداية والنهاية.
+
+---
+
+## 🔹 التحكم في التوقيت
+
+### 1. بالترتيب العادي
+
+```js
+tl.to(".box1", { x: 200 });
+tl.to(".box2", { y: 200 });
+```
+
+(التاني يبدأ بعد ما الأول يخلص).
+
+---
+
+### 2. تخليهم في نفس الوقت
+
+```js
+tl.to(".box1", { x: 200 });
+tl.to(".box2", { y: 200 }, "<"); // "<" معناها يبدأ مع اللي قبله
+```
+
+---
+
+### 3. تعمل تأخير داخلي
+
+```js
+tl.to(".box1", { x: 200 });
+tl.to(".box2", { y: 200 }, "+=0.5"); // يبدأ بعد نص ثانية من الأول
+```
+
+---
+
+## 🔹 التحكم في الـ Timeline نفسه
+
+تقدر تتعامل مع الـ Timeline كأنه Animation وحدة:
+
+```js
+tl.play();   // يشغل
+tl.pause();  // يوقف
+tl.reverse(); // يشغل بالعكس
+tl.seek(2);   // يروح لثانية 2
+tl.restart(); // يعيد من الأول
+```
+
+---
+
+## 🔹 مثال عملي (Landing Page Animation)
+
+```js
+const tl = gsap.timeline({ defaults: { duration: 1, ease: "power2.out" } });
+
+tl.from(".navbar", { y: -100, opacity: 0 })          // ينزل الناف بار من فوق
+  .from(".hero-title", { x: -200, opacity: 0 })     // بعده العنوان ييجي من الشمال
+  .from(".hero-subtitle", { x: 200, opacity: 0 }, "<") // مع العنوان بس من ناحية تانية
+  .from(".cta-button", { scale: 0, opacity: 0 });   // الزرار يكبر من ولا حاجة
+```
+
+🔎 النتيجة:
+
+* الـ Navbar ينزل الأول.
+* بعدها العنوان الرئيسي يطلع من الشمال.
+* في نفس الوقت الـ Subtitle يطلع من اليمين.
+* وفي الآخر زرار CTA يبان.
+
+---
+
+## 📝 الخلاصة
+
+* الـ **Timeline** بيسهّل إدارة Animations بدل ما تتحكم في delays يدوي.
+* فيه مرونة كبيرة: ترتيب – تشغيل مع بعض – إضافة تأخيرات – تحكم كامل (play/pause/reverse).
+* مناسب جدًا للمشاريع الكبيرة زي **Landing Pages** أو **Animations معقدة**.
+
+---
+
