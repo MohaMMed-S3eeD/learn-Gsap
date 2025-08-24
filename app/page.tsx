@@ -19,6 +19,7 @@ export default function Home() {
 
   useGSAP(() => {
     // create a intro
+
     const intro = gsap.timeline();
     intro
       .from("#intro", {
@@ -32,8 +33,9 @@ export default function Home() {
       });
 
     // create a cloud
+
     gsap.set("#cloud", {
-      y: `random(0, 500)`,
+      y: `random(0, 300)`,
       scale: `random(0.2, 0.7)`,
     });
 
@@ -52,6 +54,28 @@ export default function Home() {
         },
       }
     );
+
+    // create a frame
+    const frames = gsap.utils.toArray("#frame");
+    gsap.set(frames, { zIndex: (i) => -i + 1 });
+
+    const frameTimeline = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: "#frameSection",
+        start: "top top",
+        end: `+=${frames.length * 1000}px`,
+        pin: true,
+        scrub: 1,
+      },
+    });
+    frames.forEach((e, i) => {
+      if (i !== frames.length - 1) {
+        frameTimeline.to(e as HTMLElement, {
+          clipPath: "inset(0 0 100% 0)",
+        });
+      }
+    });
   });
 
   // useGSAP(() => {
@@ -59,7 +83,7 @@ export default function Home() {
   // });
 
   return (
-    <main className="w-full h-screen overflow-x-hidden">
+    <main className="w-full overflow-x-hidden">
       <section
         id="intro"
         className=" w-full h-screen bg-gradient-to-t from-white to-blue-500 relative"
@@ -106,6 +130,42 @@ export default function Home() {
                 Trusted by over 100,000+ users worldwide
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="relative ">
+        <div id="frameSection" className="relative h-screen">
+          <div
+            id="frame"
+            className="absolute inset-0  bg-[url('/img-3.jpg')] bg-cover bg-center flex flex-col items-center justify-center"
+          >
+            <h1 className="text-white text-4xl font-bold">Hello 1</h1>
+            <p className="text-white text-2xl font-bold">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+              quos.
+            </p>
+          </div>
+
+          <div
+            id="frame"
+            className="absolute inset-0 bg-[url('/img-1.jpg')] bg-cover bg-center flex flex-col items-center justify-center"
+          >
+            <h1 className="text-white text-4xl font-bold">Hello 2</h1>
+            <p className="text-white text-2xl font-bold">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+              quos.
+            </p>
+          </div>
+
+          <div
+            id="frame"
+            className="absolute inset-0  bg-[url('/img-2.jpg')] bg-cover bg-center flex flex-col items-center justify-center"
+          >
+            <h1 className="text-white text-4xl font-bold">Hello 3</h1>
+            <p className="text-white text-2xl font-bold">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+              quos.
+            </p>
           </div>
         </div>
       </section>
