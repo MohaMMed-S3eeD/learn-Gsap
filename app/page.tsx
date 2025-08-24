@@ -47,7 +47,7 @@ export default function Home() {
       <section className="flex flex-col w-screen justify-center items-center">
         <div className="w-full h-screen bg-slate-700">
           <div className="w-full h-full bg-slate-700">
-            <h1 className="text-white text-7xl font-bold text-center ">
+            <h1 className="text-white text-1xl font-bold text-center ">
               Start 👇
             </h1>
           </div>
