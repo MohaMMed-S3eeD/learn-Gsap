@@ -100,9 +100,8 @@ export default function Home() {
     <main>
       <section className="boxes-container" ref={container}>
         <h2>Use the button to toggle a Timeline</h2>
-        <div>
-          <button onClick={toggleTimeline}>Toggle Timeline</button>
-        </div>
+
+
         <div className="flex">
           <div className="box box-1 gradient-blue">Box 1</div>
           <br />
