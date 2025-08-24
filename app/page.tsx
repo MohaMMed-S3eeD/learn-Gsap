@@ -44,9 +44,13 @@ export default function Home() {
 
   return (
     <main>
-      <section className="flex flex-col">
-        <div className=" h-screen w-screen bg-slate-700 flex justify-center items-center">
-          <h1 className="text-white text-4xl font-bold">Start 👇</h1>
+      <section className="flex flex-col w-screen justify-center items-center">
+        <div className="w-full h-screen bg-slate-700">
+          <div className="w-full h-full bg-slate-700">
+            <h1 className="text-white text-7xl font-bold text-center ">
+              Start 👇
+            </h1>
+          </div>
         </div>
         <div
           id="conImg"
